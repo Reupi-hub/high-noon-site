@@ -187,6 +187,7 @@ ol,ul{padding:0;list-style:none}
 .poster-p{margin:18px auto 0;max-width:30ch;color:#4A2C0A;text-wrap:pretty}
 .form{display:flex;flex-direction:column;gap:12px;margin-top:24px}
 .form input{min-height:54px;padding:0 16px;border:2px solid var(--outline);border-radius:10px;background:#FBF1D6;color:var(--outline);font-size:17px;outline:none;box-shadow:inset 0 2px 6px rgba(74,44,10,.25)}
+.form .hp{position:absolute;left:-5000px;width:1px;height:1px;overflow:hidden}
 .form input::placeholder{color:#9a7a4a}
 .form input:focus{border-color:var(--red);box-shadow:inset 0 2px 6px rgba(74,44,10,.25),0 0 0 3px rgba(184,64,32,.25)}
 .form.err input{border-color:var(--red);animation:shake .4s}

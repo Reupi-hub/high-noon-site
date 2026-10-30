@@ -111,27 +111,37 @@ setTimeout(() => $$('.tier').forEach(t => t.classList.toggle('here', t.dataset.t
 }, { threshold: .5 }).observe(board);
 }
 
-// notify form
+// notify form -> Mailchimp (JSONP endpoint of the audience signup form)
 const form = $('.form');
 if (form) {
-const inp = $('input', form), done = $('.done'), fine = $('.fine'), btn = $('button', form);
-const finish = () => { form.hidden = true; fine.hidden = true; done.hidden = false; };
+const inp = $('input[type=email]', form), hp = $('.hp input', form), done = $('.done'), fine = $('.fine'), btn = $('button', form);
+const endpoint = form.dataset.endpoint;
+const finish = msg => { form.hidden = true; fine.hidden = true; done.hidden = false; if (/confirm/i.test(msg)) done.innerHTML = 'Telegram sent.<br>Confirm it in your inbox.'; };
+const fail = msg => { btn.disabled = false; form.classList.add('err'); setTimeout(() => form.classList.remove('err'), 500); if (msg) { fine.textContent = msg.replace(/<[^>]*>/g, '').replace(/^\d+ - /, ''); } };
+const subscribe = email => new Promise((resolve, reject) => {
+const cb = 'hnmc' + Date.now();
+const s = document.createElement('script');
+const t = setTimeout(() => { cleanup(); reject(new Error('timeout')); }, 12000);
+const cleanup = () => { clearTimeout(t); delete window[cb]; s.remove(); };
+window[cb] = data => { cleanup(); resolve(data); };
+s.onerror = () => { cleanup(); reject(new Error('network')); };
+const p = new URLSearchParams({ EMAIL: email, c: cb });
+if (hp) p.set(hp.name, hp.value);
+s.src = endpoint + '&' + p.toString();
+document.head.appendChild(s);
+});
 form.addEventListener('submit', async e => {
 e.preventDefault();
 const email = inp.value.trim();
-if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { form.classList.add('err'); inp.focus(); setTimeout(() => form.classList.remove('err'), 500); return; }
-const endpoint = form.dataset.endpoint;
-if (!endpoint) {
-// no mailing-list endpoint configured yet: hand off to the player's mail app
-location.href = 'mailto:contact@high-noon.co?subject=' + encodeURIComponent('Notify me when High Noon launches') + '&body=' + encodeURIComponent('Please add ' + email + ' to the launch list.');
-return;
-}
+if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { fail(); inp.focus(); return; }
+if (!endpoint) { location.href = 'mailto:contact@high-noon.co?subject=' + encodeURIComponent('Notify me when High Noon launches') + '&body=' + encodeURIComponent('Please add ' + email + ' to the launch list.'); return; }
 btn.disabled = true;
 try {
-const body = new URLSearchParams({ EMAIL: email });
-await fetch(endpoint, { method: 'POST', mode: 'no-cors', body });
-finish();
-} catch (err) { btn.disabled = false; form.classList.add('err'); setTimeout(() => form.classList.remove('err'), 500); }
+const r = await subscribe(email);
+if (r && r.result === 'success') finish(r.msg || '');
+else if (r && /already/i.test(r.msg || '')) finish('');
+else fail((r && r.msg) || 'Something went wrong. Try again.');
+} catch (err) { fail('Could not reach the telegraph. Try again.'); }
 });
 }
 
