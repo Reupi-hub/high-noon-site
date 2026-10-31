@@ -37,7 +37,7 @@ el.id = 'consent'; el.className = 'consent'; el.setAttribute('role', 'dialog'); 
 el.innerHTML = `<div class="consent-in">
 <p lang="en">We'd like to use cookies (Meta Pixel) to measure our ads and show High Noon to people who visited this page. The site works the same if you decline. <a href="https://high-noon-reborn.web.app/privacy.html" target="_blank" rel="noopener noreferrer">Privacy policy</a></p>
 <p lang="ar" dir="rtl">نودّ استخدام ملفات تعريف الارتباط (Meta Pixel) لقياس أداء إعلاناتنا وعرض High Noon لمن زار هذه الصفحة. يعمل الموقع بالطريقة نفسها إذا رفضت.</p>
-<div class="consent-btns"><button type="button" class="btn btn-wood" data-ads="0">Decline · رفض</button><button type="button" class="btn btn-wood" data-ads="1">Accept · قبول</button></div>
+<div class="consent-btns"><button type="button" class="btn btn-wood" data-ads="0">Decline<small lang="ar">رفض</small></button><button type="button" class="btn btn-wood" data-ads="1">Accept<small lang="ar">قبول</small></button></div>
 </div>`;
 el.addEventListener('click', e => {
 const b = e.target.closest('button[data-ads]'); if (!b) return;

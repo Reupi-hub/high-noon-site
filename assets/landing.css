@@ -319,3 +319,14 @@ ol,ul{padding:0;list-style:none}
 /* stagger helpers (replaces inline style attrs, CSP-safe) */
 .d08{--d:.08s}.d1{--d:.1s}.d15{--d:.15s}.d16{--d:.16s}.d2{--d:.2s}.d24{--d:.24s}.d25{--d:.25s}.d3{--d:.3s}.d32{--d:.32s}
 .rn12{--rot:-1.2deg}.rp10{--rot:1deg}.rn06{--rot:-.6deg}
+
+/* consent banner (consent.js) — above the sticky CTA; Accept and Decline weigh the same */
+.consent{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:0 14px calc(14px + env(safe-area-inset-bottom))}
+.consent[hidden]{display:none}
+.consent-in{max-width:560px;margin:0 auto;padding:16px 18px;border-radius:16px;background:linear-gradient(#5a3010,#3A1E07 40%,#22100a);border:2px solid var(--gold);box-shadow:inset 0 1px 0 rgba(255,220,150,.3),0 10px 30px rgba(0,0,0,.65),0 0 0 4px rgba(26,10,2,.6);color:var(--cream)}
+.consent p{font:14px/1.5 var(--f-body);text-wrap:pretty}
+.consent p+p{margin-top:8px;font-family:system-ui,'Segoe UI',Tahoma,sans-serif;font-size:15px}
+.consent a{color:var(--cream-2);text-decoration:underline}
+.consent-btns{display:flex;gap:10px;margin-top:14px}
+.consent .btn{flex:1;flex-direction:column;gap:2px;min-height:54px;padding:4px 12px;font-size:17px}
+.consent .btn small{font:600 14px system-ui,'Segoe UI',Tahoma,sans-serif;letter-spacing:0;text-shadow:none;color:var(--cream-2)}

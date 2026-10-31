@@ -1,10 +1,11 @@
 (() => {
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const px = (...a) => window.hnTrack && window.hnTrack(...a);   // Meta Pixel event, sent only after consent (consent.js)
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
 // anchors
-$$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+$$('a[href^="#"]:not([data-consent-open])').forEach(a => a.addEventListener('click', e => {
 const t = $(a.getAttribute('href')); if (!t) return; e.preventDefault();
 window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - 8, behavior: RM ? 'auto' : 'smooth' });
 }));
@@ -132,7 +133,7 @@ const form = $('.form');
 if (form) {
 const inp = $('input[type=email]', form), hp = $('.hp input', form), done = $('.done'), fine = $('.fine'), btn = $('button', form);
 const endpoint = form.dataset.endpoint;
-const finish = msg => { form.hidden = true; fine.hidden = true; done.hidden = false; if (/confirm/i.test(msg)) done.innerHTML = 'Telegram sent.<br>Confirm it in your inbox.'; };
+const finish = msg => { px('Lead'); form.hidden = true; fine.hidden = true; done.hidden = false; if (/confirm/i.test(msg)) done.innerHTML = 'Telegram sent.<br>Confirm it in your inbox.'; };
 const fail = msg => { btn.disabled = false; form.classList.add('err'); setTimeout(() => form.classList.remove('err'), 500); if (msg) { fine.textContent = msg.replace(/<[^>]*>/g, '').replace(/^\d+ - /, ''); } };
 const subscribe = email => new Promise((resolve, reject) => {
 const cb = 'hnmc' + Date.now();
@@ -181,6 +182,7 @@ if (st === 'idle' || st === 'hit' || st === 'early') return arm();
 if (st === 'wait') { clearTimeout(timer); set('early', 'Too early', 'BANG.', 'You drew before the bell. Tap to retry'); return; }
 if (st === 'go') {
 const ms = Math.round(performance.now() - t0);
+if (round === 1) px('QuickDrawPlayed', { ms }, true);
 set('hit', rate(ms), ms + ' ms', `Round ${++round} — tap to draw again`);
 const t = load(); t.push(ms); localStorage.setItem(KEY, JSON.stringify(t.sort((a, b) => a - b).slice(0, 10))); render();
 }
@@ -189,6 +191,10 @@ arena.addEventListener('pointerdown', e => { e.preventDefault(); act(); });
 addEventListener('keydown', e => { if (e.code !== 'Space' || e.repeat) return; const r = arena.getBoundingClientRect(); if (r.top < innerHeight * .8 && r.bottom > innerHeight * .2) { e.preventDefault(); act(); } });
 render();
 }
+
+// outbound / intent clicks
+$$('a[href*="discord.gg"]').forEach(a => a.addEventListener('click', () => px('DiscordClick', {}, true)));
+$$('.store').forEach(a => a.addEventListener('click', () => px('StoreButtonClick', { store: $('.store-n', a).textContent }, true)));
 
 // sticky CTA — visible from the top, hidden only over the notify form & the draw game
 const sticky = $('#sticky'), notify = $('#notify'), draw = $('#draw');

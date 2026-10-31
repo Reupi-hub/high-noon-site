@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://app.us7.list-manage.com; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://app.us7.list-manage.com https://connect.facebook.net; style-src 'self'; img-src 'self' data: https://www.facebook.com; font-src 'self'; connect-src 'self' https://www.facebook.com https://connect.facebook.net; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#1a0f05">
@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="assets/fonts/rye-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/special-elite-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/landing.css?v=20261031h">
+<link rel="stylesheet" href="assets/landing.css?v=20261031i">
 </head>
 <body>
 <div class="grain"></div>
@@ -154,13 +154,14 @@
 <div class="wrap">
 <div class="foot-mark">★ High Noon Reborn ★</div>
 <nav class="foot-links"><a href="https://discord.gg/k8mKZS4XHM" target="_blank" rel="noopener noreferrer">Discord</a></nav>
-<nav class="foot-legal"><a href="https://high-noon-reborn.web.app/privacy.html" target="_blank" rel="noopener noreferrer">Privacy policy</a><a href="mailto:contact@high-noon.co">contact@high-noon.co</a></nav>
+<nav class="foot-legal"><a href="https://high-noon-reborn.web.app/privacy.html" target="_blank" rel="noopener noreferrer">Privacy policy</a><a href="mailto:contact@high-noon.co">contact@high-noon.co</a><a href="#" data-consent-open hidden>Cookie settings</a></nav>
 <p class="copy">© 2026 High Noon Reborn. App Store and Google Play are trademarks of their respective owners.</p>
 </div>
 </footer>
 
 <div class="sticky" id="sticky"><div class="sticky-in"><span>Launching soon<small>App Store · Google Play</small></span><a class="btn btn-red" href="#notify">Notify me</a></div></div>
 
-<script src="assets/landing.js?v=20261031h"></script>
+<script src="assets/consent.js?v=20261031i" data-pixel="1439385060968025"></script>
+<script src="assets/landing.js?v=20261031i"></script>
 </body>
 </html>
