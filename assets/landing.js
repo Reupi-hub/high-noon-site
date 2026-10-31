@@ -4,6 +4,52 @@ const px = (...a) => window.hnTrack && window.hnTrack(...a);   // Meta Pixel eve
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
+// i18n — <html lang dir> is set by lang.js before first paint; here we swap the strings (HTML stays English = fallback).
+// Brand, store names, town signs and gun names stay in Latin. Arabic copy reviewed by: (pending native review).
+const LANG = document.documentElement.lang === 'ar' ? 'ar' : 'en';
+const AR = {
+ribbon: 'قريباً', hero_tag: '★ اسحب أسرع · عِش أطول ★', soon_on: 'قريباً على',
+hero_note: 'لم تصدر بعد. ستصلك برقية لحظة الإطلاق.<b>↓</b>',
+duel_k: 'ما ينتظرك', duel_h: 'بارِز.<br>اكسب.<br>تسلّق.',
+beat1_h: 'بارِز العالم كلّه.', beat1_p: 'مبارزات 1 ضد 1 مع خارجين عن القانون من كل مكان. اربح الذهب والغنائم وارتقِ في التصنيف.',
+streak: 'أيام متتالية', beat2_h: 'مكافآت يومية.', beat2_p: 'تحديات جديدة كل يوم. فوّت يوماً واحداً وتخسر سلسلتك.',
+exclusive: 'حصري', beat3_h: 'تذكرة المعركة.', beat3_p: 'سكنات وأسلحة لن تجدها في المتجر.',
+arsenal_k: 'الترسانة', arsenal_h: 'اختر سلاحك.', arsenal_p: 'ثلاثة أسلحة عند الإطلاق. ثلاثة طلاءات. والمزيد في الطريق.',
+steel: 'فولاذ', silver: 'فضة', gold: 'ذهب',
+gun1_p: 'متوازن. موثوق. الكلاسيكي.', gun2_p: 'خفيف. سريع. لا يخطئ.', gun3_p: 'بطيء. صاخب. لا فرصة ثانية.',
+tease_h: 'مجهول', tease_p: 'معلّق على الجدار. ليس للبيع. ليس بعد.', tease_fin: 'المزيد من الأسلحة قادم',
+ranked_k: 'التصنيف · المواسم', ranked_h: 'تسلّق السلّم.', ranked_p: 'كل مبارزة تحرّك مكافأتك. وكل موسم يتوّج أساطير جديدة.',
+season: 'الموسم الرابع', top_guns: 'أفضل المسلّحين', gunslinger: 'المبارز', reward: 'المكافأة', you: 'أنت',
+board_foot: 'اربح تأخذ نقاط مكافأة. اخسر تُعِد بعضها. المواسم تُصفّر اللوحة، لا أسطورتك.',
+rookie: 'مبتدئ', vagabond: 'متشرّد', outlaw: 'طريد', marshal: 'مارشال', legend: 'أسطورة',
+wanted: '★ مطلوب ★', you_h: 'أنت.', poster_p: 'كن في الشارع لحظة الإطلاق. برقية واحدة. بلا إزعاج.',
+notify_me: 'أبلغني', email_aria: 'البريد الإلكتروني', fine: 'قريباً على App Store و Google Play',
+done: 'وصلت البرقية.<br>نراك عند الظهيرة.', done_confirm: 'أُرسلت البرقية.<br>أكّدها من بريدك.',
+err_generic: 'حدث خطأ ما. حاول مجدداً.', err_network: 'تعذّر الوصول إلى التلغراف. حاول مجدداً.',
+discord: 'أو انضم إلى الفرقة على Discord ←',
+draw_k: 'أثبت ذلك', draw_h: 'ما مدى سرعة سحبك؟', draw_p: 'اضغط عندما يرنّ الجرس. ليس قبله.',
+round_one: 'الجولة الأولى', ready: 'مستعد؟', tap_saddle: 'اضغط للاستعداد', saddle_up: 'استعد', your_best: 'أفضل وقت لك', arena_aria: 'اختبار سرعة رد الفعل',
+hold: 'انتظر…', wait_bell: 'انتظر الجرس', draw_now: 'اسحب!', too_early: 'مبكّر جداً', bang: 'طاخ.', early_sub: 'سحبت قبل الجرس. اضغط للمحاولة مجدداً',
+round_n: 'الجولة {n} — اضغط للسحب مجدداً', no_draws: 'لا سحبات بعد. استعد.',
+r_legend: 'أسطورة', r_gunslinger: 'مبارز', r_deputy: 'نائب الشريف', r_greenhorn: 'مبتدئ', r_tumbleweed: 'سلحفاة',
+privacy: 'سياسة الخصوصية', cookies: 'إعدادات ملفات الارتباط',
+copy: '<span dir="ltr">© 2026 High Noon Reborn.</span> علامتا App Store و Google Play التجاريتان مملوكتان لأصحابهما.',
+launching: 'الإطلاق قريباً'
+};
+const tr = (k, en) => (LANG === 'ar' && AR[k] != null) ? AR[k] : en;
+if (LANG === 'ar') {
+$$('[data-i18n]').forEach(el => { const s = AR[el.dataset.i18n]; if (s == null) return; /<[a-z]/i.test(s) ? el.innerHTML = s : el.textContent = s; });
+$$('[data-i18n-aria]').forEach(el => { const s = AR[el.dataset.i18nAria]; if (s) el.setAttribute('aria-label', s); });
+}
+// EN / AR button: shows the other language, remembers the choice, reloads on the explicit ?lang= URL
+const langBtn = $('#lang');
+if (langBtn) {
+const next = LANG === 'ar' ? 'en' : 'ar';
+langBtn.textContent = next === 'ar' ? 'عربي' : 'EN';
+langBtn.lang = next; langBtn.setAttribute('aria-label', next === 'ar' ? 'العربية' : 'English');
+langBtn.addEventListener('click', () => { try { localStorage.setItem('hn_lang', next); } catch {} location.href = location.pathname + '?lang=' + next; });
+}
+
 // anchors
 $$('a[href^="#"]:not([data-consent-open])').forEach(a => a.addEventListener('click', e => {
 const t = $(a.getAttribute('href')); if (!t) return; e.preventDefault();
@@ -64,7 +110,7 @@ addEventListener('load', layout);
 
 // weapon finish tabs
 const finishBtns = $$('.finish button'), guns = $$('.gun'), realGuns = guns.filter(g => g.dataset.gun);
-const fin = { '': 'Steel', '-silver': 'Silver', '-gold': 'Gold' };
+const fin = { '': tr('steel', 'Steel'), '-silver': tr('silver', 'Silver'), '-gold': tr('gold', 'Gold') };
 Object.keys(fin).forEach(f => realGuns.forEach(g => { const i = new Image(); i.src = `assets/weapons/${g.dataset.gun}${f}.webp`; }));
 finishBtns.forEach(b => b.addEventListener('click', () => {
 finishBtns.forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-selected', x === b); });
@@ -135,7 +181,7 @@ const form = $('.form');
 if (form) {
 const inp = $('input[type=email]', form), hp = $('.hp input', form), done = $('.done'), fine = $('.fine'), btn = $('button', form);
 const endpoint = form.dataset.endpoint;
-const finish = msg => { px('Lead'); form.hidden = true; fine.hidden = true; done.hidden = false; if (/confirm/i.test(msg)) done.innerHTML = 'Telegram sent.<br>Confirm it in your inbox.'; };
+const finish = msg => { px('Lead'); form.hidden = true; fine.hidden = true; done.hidden = false; if (/confirm/i.test(msg)) done.innerHTML = tr('done_confirm', 'Telegram sent.<br>Confirm it in your inbox.'); };
 const fail = msg => { btn.disabled = false; form.classList.add('err'); setTimeout(() => form.classList.remove('err'), 500); if (msg) { fine.textContent = msg.replace(/<[^>]*>/g, '').replace(/^\d+ - /, ''); } };
 const subscribe = email => new Promise((resolve, reject) => {
 const cb = 'hnmc' + Date.now();
@@ -159,8 +205,8 @@ try {
 const r = await subscribe(email);
 if (r && r.result === 'success') finish(r.msg || '');
 else if (r && /already/i.test(r.msg || '')) finish('');
-else fail((r && r.msg) || 'Something went wrong. Try again.');
-} catch (err) { fail('Could not reach the telegraph. Try again.'); }
+else fail((r && r.msg) || tr('err_generic', 'Something went wrong. Try again.'));
+} catch (err) { fail(tr('err_network', 'Could not reach the telegraph. Try again.')); }
 });
 }
 
@@ -171,21 +217,21 @@ const ui = { k: $('.arena-k', arena), big: $('.arena-big', arena), sub: $('.aren
 const KEY = 'hn_draw_times';
 let st = 'idle', timer = 0, t0 = 0, round = 1;
 const set = (s, k, big, sub) => { st = s; arena.dataset.state = s; ui.k.textContent = k; ui.big.textContent = big; ui.sub.textContent = sub; };
-const rate = ms => ms < 180 ? 'Legend' : ms < 220 ? 'Gunslinger' : ms < 280 ? 'Deputy' : ms < 350 ? 'Greenhorn' : 'Tumbleweed';
+const rate = ms => ms < 180 ? tr('r_legend', 'Legend') : ms < 220 ? tr('r_gunslinger', 'Gunslinger') : ms < 280 ? tr('r_deputy', 'Deputy') : ms < 350 ? tr('r_greenhorn', 'Greenhorn') : tr('r_tumbleweed', 'Tumbleweed');
 const load = () => { try { return (JSON.parse(localStorage.getItem(KEY)) || []).filter(Number.isFinite); } catch { return []; } };
 const render = () => {
 const t = load().sort((a, b) => a - b).slice(0, 5);
 $('#best').textContent = t.length ? t[0] + ' ms' : '—';
-$('#scoreList').innerHTML = t.length ? t.map((ms, i) => `<li><span class="rk">${i + 1}</span><b>${ms} ms</b><span class="lbl">${rate(ms)}</span></li>`).join('') : '<li class="empty">No draws yet. Saddle up.</li>';
+$('#scoreList').innerHTML = t.length ? t.map((ms, i) => `<li><span class="rk">${i + 1}</span><b>${ms} ms</b><span class="lbl">${rate(ms)}</span></li>`).join('') : `<li class="empty">${tr('no_draws', 'No draws yet. Saddle up.')}</li>`;
 };
-const arm = () => { set('wait', 'Hold…', '· · ·', 'Wait for the bell'); timer = setTimeout(() => { set('go', '', 'DRAW!', ''); t0 = performance.now(); }, 1400 + Math.random() * 2600); };
+const arm = () => { set('wait', tr('hold', 'Hold…'), '· · ·', tr('wait_bell', 'Wait for the bell')); timer = setTimeout(() => { set('go', '', tr('draw_now', 'DRAW!'), ''); t0 = performance.now(); }, 1400 + Math.random() * 2600); };
 const act = () => {
 if (st === 'idle' || st === 'hit' || st === 'early') return arm();
-if (st === 'wait') { clearTimeout(timer); set('early', 'Too early', 'BANG.', 'You drew before the bell. Tap to retry'); return; }
+if (st === 'wait') { clearTimeout(timer); set('early', tr('too_early', 'Too early'), tr('bang', 'BANG.'), tr('early_sub', 'You drew before the bell. Tap to retry')); return; }
 if (st === 'go') {
 const ms = Math.round(performance.now() - t0);
 if (round === 1) px('QuickDrawPlayed', { ms }, true);
-set('hit', rate(ms), ms + ' ms', `Round ${++round} — tap to draw again`);
+set('hit', rate(ms), ms + ' ms', tr('round_n', 'Round {n} — tap to draw again').replace('{n}', ++round));
 const t = load(); t.push(ms); localStorage.setItem(KEY, JSON.stringify(t.sort((a, b) => a - b).slice(0, 10))); render();
 }
 };
