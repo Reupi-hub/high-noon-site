@@ -30,7 +30,7 @@ if (el) { el.hidden = false; return; }
 el = document.createElement('div');
 el.id = 'consent'; el.className = 'consent'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-label', 'Cookie settings');
 el.innerHTML = `<div class="consent-in">
-<p lang="en">We use cookies (Meta Pixel) to measure our ads and show High Noon to people who visited this page. You can turn them off: the site works the same. <a href="https://high-noon-reborn.web.app/privacy.html" target="_blank" rel="noopener noreferrer">Privacy policy</a></p>
+<p lang="en">We use cookies (Meta Pixel) to measure our ads and show High Noon to people who visited this page. You can turn them off: the site works the same. <a href="/privacy">Privacy policy</a></p>
 <p lang="ar" dir="rtl">نستخدم ملفات تعريف الارتباط (Meta Pixel) لقياس أداء إعلاناتنا وعرض High Noon لمن زار هذه الصفحة. يمكنك إيقافها، ويعمل الموقع بالطريقة نفسها.</p>
 <div class="consent-btns"><button type="button" class="btn btn-wood" data-ads="0">Turn off<small lang="ar">إيقاف</small></button><button type="button" class="btn btn-wood" data-ads="1">Allow<small lang="ar">السماح</small></button></div>
 </div>`;
