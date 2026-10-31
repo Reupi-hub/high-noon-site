@@ -25,9 +25,17 @@ $$('[data-count]:not(.elo)').forEach(el => cio.observe(el));
 // hero sunset: scroll progress drives the sun (noon -> behind the town) and the sky colour
 const wrap = $('.hero-wrap'), hero = $('.hero'), posse = $('.posse'), sun = $('.sun'), mark = $('.wordmark');
 if (wrap && hero && posse && sun) {
-let range = 1, ticking = false;
+let range = 1, ticking = false, baseW = 0, baseH = 0;
+// Viewport is measured once per orientation (never on the resize events fired when the mobile
+// address bar collapses during scroll), so the hero layout and the sun's course stay frozen.
+const fit = () => {
+baseW = innerWidth; baseH = document.documentElement.clientHeight;
+hero.style.setProperty('--svh', baseH + 'px');   // freeze the viewport height: in-app browsers resize the viewport while scrolling
+hero.classList.toggle('compact', baseH < 720);
+hero.classList.toggle('tiny', baseH < 600);
+};
 const layout = () => {
-const extra = Math.round(innerHeight * .55);         // scroll distance over which the sunset plays
+const extra = Math.round(baseH * .55);               // scroll distance over which the sunset plays
 wrap.style.height = (hero.offsetHeight + extra) + 'px';
 range = extra;
 // noon: sun centred on the wordmark at the very top; sunset: sunk behind the town, just above the ground line
@@ -44,8 +52,11 @@ const p = clamp(scrollY / range, 0, 1);
 hero.style.setProperty('--p', p.toFixed(4));
 };
 const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+const refit = () => { fit(); layout(); };
 addEventListener('scroll', onScroll, { passive: true });
-addEventListener('resize', layout);
+addEventListener('resize', () => { if (innerWidth !== baseW) refit(); });
+addEventListener('orientationchange', () => setTimeout(refit, 350));
+fit();
 if ('ResizeObserver' in window) new ResizeObserver(layout).observe(hero); else layout();
 addEventListener('load', layout);
 }
