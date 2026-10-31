@@ -23,16 +23,19 @@ const cio = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecti
 $$('[data-count]:not(.elo)').forEach(el => cio.observe(el));
 
 // hero sunset: scroll progress drives the sun (noon -> behind the town) and the sky colour
-const wrap = $('.hero-wrap'), hero = $('.hero'), posse = $('.posse'), sun = $('.sun');
+const wrap = $('.hero-wrap'), hero = $('.hero'), posse = $('.posse'), sun = $('.sun'), mark = $('.wordmark');
 if (wrap && hero && posse && sun) {
 let range = 1, ticking = false;
 const layout = () => {
-const extra = Math.round(innerHeight * .8);          // scroll distance over which the sunset plays
+const extra = Math.round(innerHeight * .55);         // scroll distance over which the sunset plays
 wrap.style.height = (hero.offsetHeight + extra) + 'px';
 range = extra;
-const startCenter = sun.offsetTop + sun.offsetHeight / 2;   // sun centre at noon, relative to the scene
-const endCenter = posse.offsetHeight * .86;                 // sunk behind the town, just above the ground line
-hero.style.setProperty('--sun-travel', Math.round(endCenter - startCenter) + 'px');
+// noon: sun centred on the wordmark at the very top; sunset: sunk behind the town, just above the ground line
+const pr = posse.getBoundingClientRect(), wr = (mark || hero).getBoundingClientRect();
+const startCenter = Math.round(wr.top - pr.top + wr.height / 2);
+const endCenter = Math.round(posse.offsetHeight * .86);
+hero.style.setProperty('--sun-start', (startCenter - sun.offsetHeight / 2) + 'px');
+hero.style.setProperty('--sun-travel', (endCenter - startCenter) + 'px');
 update();
 };
 const update = () => {
