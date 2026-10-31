@@ -81,7 +81,9 @@ if (track && dots.length) {
 const centerOf = g => g.offsetLeft - (track.clientWidth - g.offsetWidth) / 2;
 const goTo = (j, smooth = true) => track.scrollTo({ left: centerOf(guns[clamp(j, 0, guns.length - 1)]), behavior: smooth && !RM ? 'smooth' : 'auto' });
 const nearest = x => guns.reduce((b, g, j) => Math.abs(centerOf(g) - x) < Math.abs(centerOf(guns[b]) - x) ? j : b, 0);
-track.addEventListener('scroll', () => { const i = nearest(track.scrollLeft); dots.forEach((d, j) => d.classList.toggle('on', j === i)); guns.forEach((g, j) => g.classList.toggle('off', j !== i)); }, { passive: true });
+let cur = 0, pend = false;
+const sync = () => { pend = false; const i = nearest(track.scrollLeft); if (i === cur) return; cur = i; dots.forEach((d, j) => d.classList.toggle('on', j === i)); guns.forEach((g, j) => g.classList.toggle('off', j !== i)); };
+track.addEventListener('scroll', () => { if (!pend) { pend = true; requestAnimationFrame(sync); } }, { passive: true });   // one update per frame, only when the active card changes
 guns.forEach((g, j) => g.classList.toggle('off', j !== 0));
 dots.forEach((d, j) => d.addEventListener('click', () => goTo(j)));
 let drag = null;
