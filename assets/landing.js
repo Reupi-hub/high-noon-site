@@ -22,27 +22,29 @@ requestAnimationFrame(step);
 const cio = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; cio.unobserve(e.target); const el = e.target; setTimeout(() => countTo(el, +el.dataset.count, 1300, v => (el.dataset.prefix || '') + Math.round(v)), 500); }), { threshold: .6 });
 $$('[data-count]:not(.elo)').forEach(el => cio.observe(el));
 
-// hero parallax: scroll + gyro + mouse
-const hero = $('.hero'), layers = $$('[data-depth]', hero);
-let gx = 0, gy = 0, tx = 0, ty = 0, heroVisible = true, raf = 0;
-function frame() {
-tx += (gx - tx) * .07; ty += (gy - ty) * .07;
-const sy = Math.min(scrollY, innerHeight);
-layers.forEach(l => { const d = +l.dataset.depth; l.style.transform = `translate3d(${(tx * d * 34).toFixed(2)}px,${(sy * d * .42 + ty * d * 20).toFixed(2)}px,0)`; });
-raf = heroVisible ? requestAnimationFrame(frame) : 0;
-}
-if (!RM) {
-new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; if (heroVisible && !raf) raf = requestAnimationFrame(frame); }).observe(hero);
-raf = requestAnimationFrame(frame);
-addEventListener('mousemove', e => { gx = (e.clientX / innerWidth - .5) * 2; gy = (e.clientY / innerHeight - .5) * 2; }, { passive: true });
-const onOri = e => { if (e.gamma == null) return; gx = clamp(e.gamma / 22, -1, 1); gy = clamp((e.beta - 50) / 22, -1, 1); };
-const enable = () => {
-removeEventListener('touchend', enable); removeEventListener('click', enable);
-const D = window.DeviceOrientationEvent;
-if (D && typeof D.requestPermission === 'function') D.requestPermission().then(s => { if (s === 'granted') addEventListener('deviceorientation', onOri); }).catch(() => {});
-else if (D) addEventListener('deviceorientation', onOri);
+// hero sunset: scroll progress drives the sun (noon -> behind the town) and the sky colour
+const wrap = $('.hero-wrap'), hero = $('.hero'), posse = $('.posse'), sun = $('.sun');
+if (wrap && hero && posse && sun) {
+let range = 1, ticking = false;
+const layout = () => {
+const extra = Math.round(innerHeight * .8);          // scroll distance over which the sunset plays
+wrap.style.height = (hero.offsetHeight + extra) + 'px';
+range = extra;
+const startCenter = sun.offsetTop + sun.offsetHeight / 2;   // sun centre at noon, relative to the scene
+const endCenter = posse.offsetHeight * .86;                 // sunk behind the town, just above the ground line
+hero.style.setProperty('--sun-travel', Math.round(endCenter - startCenter) + 'px');
+update();
 };
-if ('ontouchstart' in window) { addEventListener('touchend', enable, { passive: true }); addEventListener('click', enable); }
+const update = () => {
+ticking = false;
+const p = clamp(scrollY / range, 0, 1);
+hero.style.setProperty('--p', p.toFixed(4));
+};
+const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+addEventListener('scroll', onScroll, { passive: true });
+addEventListener('resize', layout);
+if ('ResizeObserver' in window) new ResizeObserver(layout).observe(hero); else layout();
+addEventListener('load', layout);
 }
 
 // weapon finish tabs
