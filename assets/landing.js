@@ -124,8 +124,8 @@ setTimeout(() => {
 rows.forEach(r => { const k = +r.dataset.rank; if (r === you) r.dataset.rank = 2; else if (k >= 2 && k < 5) r.dataset.rank = k + 1; });
 setRanks();
 const elo = $('.elo', you); elo.dataset.from = you.dataset.elo; countTo(elo, +you.dataset.elo + 24, 900, fmt);
-$('img', you).src = 'assets/star-platinum.png'; you.classList.add('up');
-setTimeout(() => $$('.tier').forEach(t => t.classList.toggle('here', t.dataset.tier === 'platinum')), 700);
+$('.badge', you).src = 'assets/star-diamond.png'; you.classList.add('up');   // 1,978 + 24 = 2,002 -> Legend (>= 2,000)
+setTimeout(() => $$('.tier').forEach(t => t.classList.toggle('here', t.dataset.tier === 'legend')), 700);
 }, 2300);
 }, { threshold: .5 }).observe(board);
 }
