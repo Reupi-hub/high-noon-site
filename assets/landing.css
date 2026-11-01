@@ -100,7 +100,8 @@ ol,ul{padding:0;list-style:none}
 .call .lede{max-width:36ch}
 .status{display:inline-flex;align-items:center;gap:9px;margin-top:16px;font:11px var(--f-type);letter-spacing:.22em;text-transform:uppercase;color:var(--cream);background:rgba(184,64,32,.22);border:1.5px solid var(--red);border-radius:999px;padding:8px 14px 7px;text-align:center}
 .status::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--red-l);animation:ping 2s ease-out infinite}
-.call .btn{margin-top:22px}
+.call-btns{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:22px}
+.call-btns .btn{width:100%;max-width:340px}
 .call-note{margin-top:16px;font:11px var(--f-type);letter-spacing:.22em;text-transform:uppercase;color:var(--copper)}
 @keyframes ping{0%{box-shadow:0 0 0 0 rgba(216,96,58,.6)}100%{box-shadow:0 0 0 10px rgba(216,96,58,0)}}
 
@@ -326,6 +327,8 @@ ol,ul{padding:0;list-style:none}
 .sec{padding:100px 0}
 .beta-call{padding:72px 0 40px}
 .call{padding:40px 36px 34px}
+.call-btns{flex-direction:row;justify-content:center}
+.call-btns .btn{width:auto;min-width:220px;white-space:nowrap}
 .hero-content{min-height:calc(var(--svh,100svh) * 1);padding-top:18px;padding-bottom:110px}
 .posse{min-height:clamp(160px,calc(var(--svh,100svh) * 0.3),260px);margin-top:0}
 .skin-l.front{height:100%}
