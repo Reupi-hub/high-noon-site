@@ -15,7 +15,19 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://high-noon.co/beta.html"/>
   </url>
   <url>
-    <loc>https://high-noon.co/privacy</loc>
-    <lastmod>2026-10-31</lastmod>
+    <loc>https://high-noon.co/privacy/</loc>
+    <lastmod>2026-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://high-noon.co/terms/</loc>
+    <lastmod>2026-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://high-noon.co/support/</loc>
+    <lastmod>2026-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://high-noon.co/delete-account/</loc>
+    <lastmod>2026-11-19</lastmod>
   </url>
 </urlset>

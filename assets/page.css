@@ -1,0 +1,51 @@
+/* Content pages (support, privacy, terms, delete-account), loaded after landing.css:
+   same fonts, tokens, wood background, grain and footer; the text sits on a parchment sheet. */
+.page{display:flex;flex-direction:column;min-height:100svh}
+.top{padding:calc(22px + env(safe-area-inset-top)) 20px 0;text-align:center}
+.top-mark{font:12px var(--f-type);letter-spacing:.42em;text-transform:uppercase;color:var(--cream-2)}
+.top-mark:hover{color:var(--gold)}
+.page-head{padding:26px 20px 26px;text-align:center}
+.page-title{font:400 clamp(36px,10vw,60px)/1 var(--f-display);color:var(--cream);margin-top:12px;text-shadow:0 3px 0 #1a0a02,0 8px 18px rgba(0,0,0,.5);text-wrap:balance}
+.page-sub{font-style:italic;color:var(--cream-2);margin:14px auto 0;max-width:36ch;text-wrap:pretty}
+.updated{font:12px var(--f-type);letter-spacing:.2em;text-transform:uppercase;color:var(--copper);margin-top:14px}
+
+.doc{flex:1 0 auto;width:100%;max-width:760px;margin:0 auto;padding:0 16px 56px}
+.sheet{position:relative;padding:30px 22px 34px;border:2px solid var(--outline);border-radius:6px;background:linear-gradient(#F1E1B6,#E8D4A0 35%,#DEC690);color:#2a1404;box-shadow:inset 0 0 70px rgba(139,90,30,.28),0 6px 0 #1a0a02,0 16px 40px rgba(0,0,0,.55)}
+.sheet+.sheet{margin-top:26px}
+.sheet h2{font:400 23px/1.2 var(--f-display);color:#7A2A12;margin:32px 0 10px}
+.sheet h2:first-child{margin-top:0}
+.sheet h3{font:700 17px/1.35 var(--f-body);margin:20px 0 6px}
+.sheet p,.sheet li{font-size:16.5px;line-height:1.62}
+.sheet p+p,.sheet ul+p,.sheet ol+p,.sheet p+ul,.sheet p+ol{margin-top:12px}
+.sheet ul{margin-top:10px}
+.sheet ul li{position:relative;padding-left:22px;margin-top:9px}
+.sheet ul li::before{content:"✦";position:absolute;left:0;top:.3em;font-size:12px;line-height:1.6;color:#8B6A1C}
+.sheet ol{list-style:decimal;padding-left:26px;margin-top:10px}
+.sheet ol li{margin-top:7px;padding-left:4px}
+.sheet a{color:#8a2e14;text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
+.sheet a:hover{color:#B84020}
+.sheet strong{font-weight:700}
+.sheet .note{font-size:15px;font-style:italic;color:#5a3a18}
+
+/* Support: contact buttons */
+.reach{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+.sheet a.btn{flex:1 1 220px;font-size:18px;color:var(--cream);text-decoration:none}
+
+/* Support: FAQ */
+.faq details{border-top:1px solid rgba(61,31,5,.28)}
+.faq details:last-child{border-bottom:1px solid rgba(61,31,5,.28)}
+.faq summary{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:15px 0;cursor:pointer;list-style:none;font:700 17px/1.35 var(--f-body)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;font:400 24px/1 var(--f-display);color:#7A2A12}
+.faq details[open] summary::after{content:"−"}
+.faq summary:focus-visible{outline:2px solid #8a2e14;outline-offset:3px}
+.faq .a{padding:0 0 16px}
+
+/* No sticky CTA on these pages: the footer needs no room for it. */
+.page .foot{padding-bottom:calc(48px + env(safe-area-inset-bottom))}
+.foot a[aria-current="page"]{color:var(--gold)}
+
+@media (min-width:700px){
+.sheet{padding:40px 46px 44px}
+.page-head{padding:38px 20px 34px}
+}
