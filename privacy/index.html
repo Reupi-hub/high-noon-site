@@ -22,7 +22,7 @@
 <div class="page-head">
 <p class="kicker">The fine print</p>
 <h1 class="page-title">Privacy Policy</h1>
-<p class="updated">Last updated: November 19, 2026</p>
+<p class="updated">Last updated: November 21, 2026</p>
 </div>
 
 <main class="doc">
@@ -31,10 +31,10 @@
 
 <h2>Data we collect in the game</h2>
 <ul>
-<li><strong>Account identity.</strong> You sign in with Google, with Apple (on iOS), or with an email address and a password. With Google or Apple, we receive and store the name and email address your identity provider shares. With Apple’s “Hide My Email” you may share a private relay address instead of your real one — that works fine. With an email address, we store that address and send it a confirmation link; your password is handled by Google Firebase Authentication and we never see it.</li>
+<li><strong>Account identity.</strong> You sign in with Google, with Apple (on iOS), or with an email address and a password. The name and email address your identity provider shares, or the address you type, are kept with your sign-in record in Google Firebase Authentication: they are not part of your game profile and other players never see them. With Apple’s “Hide My Email” you may share a private relay address instead of your real one — that works fine. With an email address, we send it a confirmation link; your password is handled by Firebase Authentication and we never see it. If you turn on two-step verification, the secret key of your authenticator app is kept by the same service.</li>
 <li><strong>Game profile and gameplay data.</strong> Your chosen username, battle tag, level, experience, in-game currencies, inventory, match history, rank and season statistics, achievements, bounty progress, Frontier Pass progress, and friend list.</li>
 <li><strong>Account history.</strong> Every change to your game profile and Frontier Pass is recorded in a history attached to your account: what changed (for example gold, wampum, experience, level, rank or items), the value before and after, and the action that caused it (a duel result, a reward, a purchase). We use it to answer support requests, give back anything lost to a bug, and detect cheating and fraud. It is deleted with your account.</li>
-<li><strong>Season records.</strong> When a season ends we keep a copy of your rank and progress, with your username, so that rewards and items from past seasons can be returned to you. They are deleted with your account.</li>
+<li><strong>Season records.</strong> When a season ends, and when the beta ended, we keep a copy of your game profile at that moment, so that rewards and items from past seasons can be returned to you. They are deleted with your account.</li>
 <li><strong>Online presence.</strong> Whether you are currently online, in the lobby, or in a duel — shown to other players (e.g. in the lobby carousel and friend list).</li>
 <li><strong>Device motion (gyroscope).</strong> The app uses the gyroscope to aim during duels. Motion data is processed on your device only and is never transmitted or stored.</li>
 <li><strong>Player reports and blocks.</strong> If you report or block another player, we store the report (who reported whom, the reason, and an optional note) or your block list, to moderate the game and keep abusive players away from you.</li>
@@ -46,8 +46,8 @@
 
 <h2>Diagnostics &amp; analytics</h2>
 <ul>
-<li><strong>Crash reports.</strong> If the app crashes, a technical report (stack trace, device model, OS version, app version, the screens visited before the crash, and your player ID so we can help with support requests) is sent to Sentry, our crash-reporting processor. No advertising identifiers are collected.</li>
-<li><strong>Gameplay analytics.</strong> We log product events first-party into our own database (screens visited, sign-in method, match funnel and duel statistics such as draw time and accuracy, device model and OS version) to improve the game and tune fair-play protections. This data is never shared with third parties.</li>
+<li><strong>Crash and error reports.</strong> If the app crashes or hits an error, a technical report (error message, stack trace, the screen you were on, device model, OS version, app version, and your player ID so we can help with support requests) is stored in our own database, with the analytics below. It is not sent to any third party. No advertising identifiers are collected.</li>
+<li><strong>Gameplay analytics.</strong> We log product events first-party into our own database (screens visited, buttons tapped, sign-in method, match funnel and duel statistics such as draw time, accuracy and smoothness, device model and OS version, the region and time zone set on your phone, and the response time of our servers) to improve the game and tune fair-play protections. This data is never shared with third parties.</li>
 </ul>
 
 <h2>What we do NOT do</h2>
@@ -57,7 +57,7 @@
 </ul>
 
 <h2>Where your data lives</h2>
-<p>Game data is stored in Google Firebase (Cloud Firestore and Realtime Database), hosted in the europe-west1 region. Data is encrypted in transit (HTTPS).</p>
+<p>Game data is stored in Google Firebase (Cloud Firestore and Realtime Database) on servers in the European Union (Belgium and France). Sign-in records are handled by Google Firebase Authentication, a Google service that may process them outside the European Union. Data is encrypted in transit (HTTPS).</p>
 
 <h2>Purchases</h2>
 <p>In the app, the Frontier Pass and wampum packs are sold through the <strong>App Store</strong> or <strong>Google Play</strong>, which process the payment. Our purchase-validation provider RevenueCat receives the purchase record (product, transaction ID, date, store) linked to your player ID, so the purchase can be credited to your account and the pass restored on a new device. We never receive your payment details.</p>
@@ -68,7 +68,6 @@
 <li><strong>Google Firebase</strong> — game servers, database and sign-in.</li>
 <li><strong>Google and Apple sign-in</strong> — to identify your account.</li>
 <li><strong>Apple App Store, Google Play and RevenueCat</strong> — purchases (see above).</li>
-<li><strong>Sentry</strong> — crash reports (see above).</li>
 <li><strong>Discord</strong> — our community server is a third-party service with its own privacy policy. We only see what you choose to post there.</li>
 <li><strong>Mailchimp</strong>, <strong>Meta</strong> (the Meta Pixel) and <strong>GitHub Pages</strong> — this website (see below).</li>
 </ul>
@@ -82,7 +81,7 @@
 </ul>
 
 <h2>Account deletion</h2>
-<p>You can delete your account at any time from inside the app: <strong>Menu → Settings → Account → Delete Account</strong>. This permanently removes your profile, match history, account history, season records, inventory, friends, friend requests and challenges, bug reports, presence data, and sign-in record. Some non-personal records are retained where required (payment records for legal/accounting purposes, and anonymized anti-cheat audit entries). Analytics events keep only the random player ID, which no longer points to anyone once the account is gone.</p>
+<p>You can delete your account at any time from inside the app: <strong>Menu → Settings → Account → Delete Account</strong>. This permanently removes your profile, match history, account history, season records, inventory, friends, friend requests and challenges, bug reports, analytics and crash reports, presence data, and sign-in record. Some non-personal records are retained where required (payment records for legal/accounting purposes, and anonymized anti-cheat audit entries).</p>
 <p>No longer have the app? See <a href="../delete-account/">how to request deletion without the app</a>.</p>
 
 <h2>Your rights</h2>
