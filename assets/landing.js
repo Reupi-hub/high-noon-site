@@ -10,9 +10,9 @@ const LANG = document.documentElement.lang === 'ar' ? 'ar' : 'en';
 const AR = {
 ribbon: '6 ديسمبر', hero_tag: '★ اسحب أسرع · عِش أطول ★', soon_on: 'يصدر 6 ديسمبر على',
 hero_note: 'ستصلك برقية عند الظهيرة.<b>↓</b>', note_when: 'يصدر {when} بتوقيتك.<b>↓</b>',
-cd_label: 'الإطلاق: 6 ديسمبر 2026، عند الظهيرة بتوقيت باريس', cd_d: 'أيام', cd_h: 'ساعات', cd_m: 'دقائق', cd_s: 'ثوانٍ',
-beta_tag: 'بيتا', beta_k: 'الأيام الأخيرة من البيتا', beta_h: 'البيتا تنتهي في 6 ديسمبر.', beta_status: 'وبعدها يدخل الجميع',
-beta_p: 'أول المختبرين يتبارزون منذ 31 أكتوبر. في 6 ديسمبر، يُفتح High Noon للجميع على iPhone و Android، مجاناً.',
+cd_label: 'الإطلاق: 6 ديسمبر 2026، عند الظهيرة بتوقيت باريس', cd_k: 'الإطلاق بعد', cd_d: 'أيام', cd_h: 'ساعات', cd_m: 'دقائق', cd_s: 'ثوانٍ',
+beta_tag: 'الإطلاق', beta_k: 'إطلاق اللعبة', beta_h: 'High Noon ينطلق في 6 ديسمبر.', beta_status: 'مفتوح للجميع',
+beta_p: 'انتهت البيتا. شكراً لأول المختبرين الذين تبارزوا منذ 31 أكتوبر. في 6 ديسمبر، يُفتح High Noon للجميع على iPhone و Android، مجاناً.',
 beta_cta: 'انضم إلى قائمة الإطلاق ←', beta_discord: 'انضم إلى المجتمع', beta_note: 'مجاناً على iOS و Android · <a href="beta.html">عن البيتا</a>',
 duel_k: 'ما ينتظرك', duel_h: 'بارِز.<br>اكسب.<br>تسلّق.',
 beat1_h: 'بارِز العالم كلّه.', beat1_p: 'مبارزات 1 ضد 1 مع خارجين عن القانون من كل مكان. اربح الذهب والغنائم وارتقِ في التصنيف.',
@@ -299,7 +299,7 @@ if (isLive) return;
 const left = LAUNCH - now();
 if (left <= 0) { if (!clockChecked) return; isLive = true; goLive(); document.dispatchEvent(new Event('hn:live')); return; }   // a fast visitor clock must not open the doors early
 const p = parts(left);
-cdNums.forEach(b => { b.textContent = pad(p[b.dataset.u]); });
+cdNums.forEach(b => { const v = pad(p[b.dataset.u]); if (b.textContent === v) return; b.textContent = v; const u = b.parentNode; u.classList.remove('flip'); void u.offsetWidth; u.classList.add('flip'); });   // restart the flip animation
 if (stickyS) stickyS.textContent = shortLeft(p);
 timer = setTimeout(tick, (left % 1000) + 20);
 };
