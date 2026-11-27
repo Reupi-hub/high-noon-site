@@ -8,11 +8,12 @@ const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 // Brand, store names, town signs and gun names stay in Latin. Arabic copy reviewed by: (pending native review).
 const LANG = document.documentElement.lang === 'ar' ? 'ar' : 'en';
 const AR = {
-ribbon: 'قريباً', hero_tag: '★ اسحب أسرع · عِش أطول ★', soon_on: 'قريباً على',
-hero_note: 'لم تصدر بعد. ستصلك برقية لحظة الإطلاق.<b>↓</b>',
-beta_tag: 'بيتا', beta_k: 'البيتا الآن · iOS و Android', beta_h: 'انضم إلى البيتا.', beta_status: 'البيتا جارية — المقاعد ممتلئة حالياً',
-beta_p: 'التطبيق بين أيدي أول دفعة من المختبرين على iPhone و Android منذ 31 أكتوبر. المقاعد تُفتح على دفعات صغيرة — احجز مكانك في الطابور، مجاناً.',
-beta_cta: 'كيف تدخل؟ ←', beta_discord: 'انضم إلى المجتمع', beta_note: 'iOS و Android · قائمة انتظار مجانية · Discord',
+ribbon: '6 ديسمبر', hero_tag: '★ اسحب أسرع · عِش أطول ★', soon_on: 'يصدر 6 ديسمبر على',
+hero_note: 'ستصلك برقية عند الظهيرة.<b>↓</b>', note_when: 'يصدر {when} بتوقيتك.<b>↓</b>',
+cd_label: 'الإطلاق: 6 ديسمبر 2026، عند الظهيرة بتوقيت باريس', cd_d: 'أيام', cd_h: 'ساعات', cd_m: 'دقائق', cd_s: 'ثوانٍ',
+beta_tag: 'بيتا', beta_k: 'الأيام الأخيرة من البيتا', beta_h: 'البيتا تنتهي في 6 ديسمبر.', beta_status: 'وبعدها يدخل الجميع',
+beta_p: 'أول المختبرين يتبارزون منذ 31 أكتوبر. في 6 ديسمبر، يُفتح High Noon للجميع على iPhone و Android، مجاناً.',
+beta_cta: 'انضم إلى قائمة الإطلاق ←', beta_discord: 'انضم إلى المجتمع', beta_note: 'مجاناً على iOS و Android · <a href="beta.html">عن البيتا</a>',
 duel_k: 'ما ينتظرك', duel_h: 'بارِز.<br>اكسب.<br>تسلّق.',
 beat1_h: 'بارِز العالم كلّه.', beat1_p: 'مبارزات 1 ضد 1 مع خارجين عن القانون من كل مكان. اربح الذهب والغنائم وارتقِ في التصنيف.',
 streak: 'أيام متتالية', beat2_h: 'مكافآت يومية.', beat2_p: 'تحديات جديدة كل يوم. فوّت يوماً واحداً وتخسر سلسلتك.',
@@ -25,8 +26,8 @@ ranked_k: 'التصنيف · المواسم', ranked_h: 'تسلّق السلّم
 season: 'الموسم الرابع', top_guns: 'أفضل المسلّحين', gunslinger: 'المبارز', reward: 'المكافأة', you: 'أنت',
 board_foot: 'اربح تأخذ نقاط مكافأة. اخسر تُعِد بعضها. المواسم تُصفّر اللوحة، لا أسطورتك.',
 rookie: 'مبتدئ', vagabond: 'متشرّد', outlaw: 'طريد', marshal: 'مارشال', legend: 'أسطورة',
-wanted: '★ مطلوب ★', you_h: 'أنت.', poster_p: 'كن في الشارع لحظة الإطلاق. برقية واحدة. بلا إزعاج.',
-notify_me: 'أبلغني', email_aria: 'البريد الإلكتروني', fine: 'قريباً على App Store و Google Play',
+wanted: '★ مطلوب ★', you_h: 'أنت.', poster_p: '6 ديسمبر، عند الظهيرة. كن في الشارع. برقية واحدة. بلا إزعاج.',
+notify_me: 'أبلغني', email_aria: 'البريد الإلكتروني', fine: '6 ديسمبر · App Store و Google Play',
 done: 'وصلت البرقية.<br>نراك عند الظهيرة.', done_confirm: 'أُرسلت البرقية.<br>أكّدها من بريدك.',
 err_generic: 'حدث خطأ ما. حاول مجدداً.', err_network: 'تعذّر الوصول إلى التلغراف. حاول مجدداً.',
 discord: 'أو انضم إلى الفرقة على Discord ←',
@@ -35,9 +36,14 @@ round_one: 'الجولة الأولى', ready: 'مستعد؟', tap_saddle: 'اض
 hold: 'انتظر…', wait_bell: 'انتظر الجرس', draw_now: 'اسحب!', too_early: 'مبكّر جداً', bang: 'طاخ.', early_sub: 'سحبت قبل الجرس. اضغط للمحاولة مجدداً',
 round_n: 'الجولة {n} — اضغط للسحب مجدداً', no_draws: 'لا سحبات بعد. استعد.',
 r_legend: 'أسطورة', r_gunslinger: 'مبارز', r_deputy: 'نائب الشريف', r_greenhorn: 'مبتدئ', r_tumbleweed: 'سلحفاة',
-privacy: 'سياسة الخصوصية', cookies: 'إعدادات ملفات الارتباط',
-copy: '<span dir="ltr">© 2026 High Noon Reborn.</span> علامتا App Store و Google Play التجاريتان مملوكتان لأصحابهما.',
-launching: 'الإطلاق قريباً'
+privacy: 'سياسة الخصوصية', cookies: 'إعدادات ملفات الارتباط', legal: 'الإشعار القانوني',
+copy: '<span dir="ltr">© 2026 LEMON TREE.</span> علامتا App Store و Google Play التجاريتان مملوكتان لأصحابهما.',
+launching: 'يصدر 6 ديسمبر',
+// launch day (the countdown reached zero)
+ribbon_live: 'متوفر الآن', get_on: 'حمّله من', today_on: 'يصدر اليوم على', note_live: 'إنها الظهيرة. اسحب.', note_rolling: 'إنها الظهيرة. التطبيقات في طريقها إلى المتاجر.', note_ios: 'متوفر الآن على App Store. Google Play في الطريق.', note_android: 'متوفر الآن على Google Play. App Store في الطريق.',
+poster_live: 'High Noon متوفر الآن. نراك في الشارع.', poster_rolling: 'التطبيقات في طريقها إلى المتاجر. برقية واحدة عند وصولها.',
+fine_live: 'مجاناً على App Store و Google Play', fine_rolling: 'يصدر اليوم · App Store و Google Play', launching_live: 'متوفر الآن', download: 'حمّل', today_k: 'يصدر اليوم',
+title_live: 'High Noon — متوفر الآن على App Store و Google Play'
 };
 const tr = (k, en) => (LANG === 'ar' && AR[k] != null) ? AR[k] : en;
 if (LANG === 'ar') {
@@ -50,12 +56,13 @@ if (langBtn) {
 const next = LANG === 'ar' ? 'en' : 'ar';
 langBtn.textContent = next === 'ar' ? 'عربي' : 'EN';
 langBtn.lang = next; langBtn.setAttribute('aria-label', next === 'ar' ? 'العربية' : 'English');
-langBtn.addEventListener('click', () => { try { localStorage.setItem('hn_lang', next); } catch {} location.href = location.pathname + '?lang=' + next; });
+langBtn.addEventListener('click', () => { try { localStorage.setItem('hn_lang', next); } catch {} const q = new URLSearchParams(location.search); q.set('lang', next); location.href = location.pathname + '?' + q.toString(); });
 }
 
 // anchors
 $$('a[href^="#"]:not([data-consent-open])').forEach(a => a.addEventListener('click', e => {
-const t = $(a.getAttribute('href')); if (!t) return; e.preventDefault();
+const h = a.getAttribute('href'); if (!h || h[0] !== '#' || h.length < 2) return;   // re-read at click time: launch day swaps some hrefs to store links
+const t = $(h); if (!t) return; e.preventDefault();
 window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - 8, behavior: RM ? 'auto' : 'smooth' });
 }));
 
@@ -78,11 +85,21 @@ if (wrap && hero && posse && sun) {
 let range = 1, ticking = false, baseW = 0, baseH = 0;
 // Viewport is measured once per orientation (never on the resize events fired when the mobile
 // address bar collapses during scroll), so the hero layout and the sun's course stay frozen.
-const fit = () => {
+const measure = () => {
 baseW = innerWidth; baseH = document.documentElement.clientHeight;
 hero.style.setProperty('--svh', baseH + 'px');   // freeze the viewport height: in-app browsers resize the viewport while scrolling
+};
+const fitContent = () => {
 hero.classList.toggle('compact', baseH < 720);
 hero.classList.toggle('tiny', baseH < 600);
+// the stores must clear the sticky bar: if the hero content still overflows the screen, step down a size (offsetHeight ignores the entrance transforms)
+posse.style.minHeight = '';
+const over = () => hero.offsetHeight - baseH;
+const trim = floor => { const o = over(); if (o > 0.5) posse.style.minHeight = Math.max(floor, posse.offsetHeight - o) + 'px'; };   // less scenery height, never under the floor
+if (over() > 0.5) hero.classList.add('compact');
+trim(130);
+if (over() > 0.5) hero.classList.add('tiny');
+trim(90);
 };
 const layout = () => {
 const extra = Math.round(baseH * .55);               // scroll distance over which the sunset plays
@@ -102,13 +119,16 @@ const p = clamp(scrollY / range, 0, 1);
 hero.style.setProperty('--p', p.toFixed(4));
 };
 const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
-const refit = () => { fit(); layout(); };
+const refit = () => { measure(); fitContent(); layout(); };
+const refitContent = () => { fitContent(); layout(); };   // fonts in, launch switch: same viewport, new content height
 addEventListener('scroll', onScroll, { passive: true });
 addEventListener('resize', () => { if (innerWidth !== baseW) refit(); });
 addEventListener('orientationchange', () => setTimeout(refit, 350));
-fit();
+measure(); fitContent();
 if ('ResizeObserver' in window) new ResizeObserver(layout).observe(hero); else layout();
-addEventListener('load', layout);
+addEventListener('load', () => { refitContent(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(refitContent); });   // the western fonts change the title height
+if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', refitContent);
+document.addEventListener('hn:live', refitContent);   // the countdown disappears at launch
 }
 
 // weapon finish tabs
@@ -213,6 +233,80 @@ else fail((r && r.msg) || tr('err_generic', 'Something went wrong. Try again.'))
 });
 }
 
+// launch countdown -> at zero the page switches itself to "out now" (no redeploy needed)
+const LAUNCH = Date.parse('2026-12-06T11:00:00Z');   // Sunday December 6, 2026, 12:00 Paris time (CET = UTC+1)
+const STORE_URL = { ios: 'https://apps.apple.com/app/id6811609069', android: '' };   // empty = link not known yet: that button keeps pointing at the launch list
+// testing only, on a local server: ?now=2026-12-06T11:00:00Z previews the page at that moment (display only, nothing is stored or sent)
+const nowQ = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? new URLSearchParams(location.search).get('now') : null;
+let skew = nowQ && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?Z$/.test(nowQ) && Number.isFinite(Date.parse(nowQ)) ? Date.parse(nowQ) - Date.now() : 0;
+const now = () => Date.now() + skew;
+// a visitor's clock can be wrong: align on the server's Date header (same origin, allowed by connect-src 'self') when it is off by more than 30 s
+let clockChecked = !!nowQ || !window.fetch;
+const clockDone = () => { if (!clockChecked) { clockChecked = true; restart(); } };
+if (!clockChecked) {
+fetch(location.pathname, { method: 'HEAD', cache: 'no-store' }).then(r => { const d = Date.parse(r.headers.get('Date')); if (Number.isFinite(d) && Math.abs(d - Date.now()) > 30000) skew = d - Date.now(); }).catch(() => {}).then(clockDone);
+setTimeout(clockDone, 3000);   // never wait more than 3 s for the server
+}
+const pad = n => String(n).padStart(2, '0');
+const parts = ms => { const t = Math.max(0, Math.ceil(ms / 1000)); return { d: Math.floor(t / 86400), h: Math.floor(t % 86400 / 3600), m: Math.floor(t % 3600 / 60), s: t % 60 }; };
+const shortLeft = p => LANG === 'ar'
+? (p.d ? `${p.d} يوم و${p.h} ساعة` : `${p.h} ساعة و${p.m} دقيقة`)
+: (p.d ? `${p.d}d ${pad(p.h)}h ${pad(p.m)}m` : `${pad(p.h)}h ${pad(p.m)}m ${pad(p.s)}s`);
+// the launch moment in the visitor's own time zone, under the store buttons
+const noteEl = $('#heroNote');
+try {
+const when = new Intl.DateTimeFormat(LANG === 'ar' ? 'ar-u-nu-latn' : 'en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(LAUNCH);
+if (noteEl && Date.now() < LAUNCH) noteEl.innerHTML = tr('note_when', 'Out {when}, your time.<b>↓</b>').replace('{when}', when.replace(/[<>&]/g, ''));
+} catch {}
+const setT = (el, k, en) => { if (!el) return; const s = tr(k, en); /<[a-z]/i.test(s) ? el.innerHTML = s : el.textContent = s; };
+const ext = (a, url) => { a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; };
+const cd = $('#countdown'), cdNums = cd ? $$('[data-u]', cd) : [], stickyS = $('#stickyS');
+if (stickyS) stickyS.lang = LANG;
+const goLive = () => {
+const both = !!(STORE_URL.ios && STORE_URL.android);
+document.body.classList.add('live');
+document.title = tr('title_live', 'High Noon — Out now on App Store & Google Play');
+setT($('#ribbon'), 'ribbon_live', 'Out now');
+if (cd) cd.hidden = true;
+$$('.store').forEach(a => { const url = STORE_URL[a.dataset.store]; setT($('.store-k', a), url ? 'get_on' : 'today_on', url ? 'Get it on' : 'Out today on'); if (url) ext(a, url); });
+const noteK = both ? ['note_live', "It's high noon. Draw."] : STORE_URL.ios ? ['note_ios', 'Out now on the App Store. Google Play is on its way.'] : STORE_URL.android ? ['note_android', 'Out now on Google Play. The App Store is on its way.'] : ['note_rolling', "It's high noon. The apps are rolling out."];
+setT(noteEl, noteK[0], noteK[1]);
+const beta = $('#beta'); if (beta) beta.hidden = true;
+setT($('#posterP'), both ? 'poster_live' : 'poster_rolling', both ? 'High Noon is out. See you in the street.' : 'The apps are rolling out to the stores. One telegram when they land.');
+const fineEl = $('.notify .fine'), doneEl = $('.notify .done');
+if (both) {
+if (form) form.hidden = true; if (doneEl) doneEl.hidden = true; setT(fineEl, 'fine_live', 'Free on App Store & Google Play'); if (fineEl) fineEl.hidden = false;
+const heroStores = $('.hero .stores'), poster = $('.notify .poster');
+if (heroStores && poster && !$('.stores', poster)) { const c = heroStores.cloneNode(true); c.classList.add('poster-stores'); poster.insertBefore(c, fineEl || null); }
+}
+else if (fineEl && !fineEl.hidden) setT(fineEl, 'fine_rolling', 'Out today · App Store & Google Play');
+const btn = $('#stickyBtn');
+const ua = navigator.userAgent, isIOS = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1), isAndroid = /Android/.test(ua);
+const mine = isIOS ? STORE_URL.ios : isAndroid ? STORE_URL.android : '';
+if (mine || (both && !isIOS && !isAndroid)) {   // a link for this visitor (or a desktop visitor once both stores are live): "Out now · Download"
+setT($('#stickyK'), 'launching_live', 'Out now');
+if (stickyS) { stickyS.lang = 'en'; stickyS.textContent = both ? 'iOS · Android' : isIOS ? 'App Store' : 'Google Play'; }
+if (btn) { if (mine) ext(btn, mine); else btn.href = '#top'; setT(btn, 'download', 'Download'); }
+} else {   // this visitor's store is not live yet: keep the launch list
+setT($('#stickyK'), 'today_k', 'Out today');
+if (stickyS) { stickyS.lang = 'en'; stickyS.textContent = 'App Store · Google Play'; }
+}
+};
+let timer = 0, isLive = false;
+const tick = () => {
+clearTimeout(timer);
+if (isLive) return;
+const left = LAUNCH - now();
+if (left <= 0) { if (!clockChecked) return; isLive = true; goLive(); document.dispatchEvent(new Event('hn:live')); return; }   // a fast visitor clock must not open the doors early
+const p = parts(left);
+cdNums.forEach(b => { b.textContent = pad(p[b.dataset.u]); });
+if (stickyS) stickyS.textContent = shortLeft(p);
+timer = setTimeout(tick, (left % 1000) + 20);
+};
+const restart = () => tick();
+document.addEventListener('visibilitychange', () => { if (!document.hidden) tick(); });   // background tabs throttle timers: resync on return
+tick();
+
 // draw game
 const arena = $('#arena');
 if (arena) {
@@ -245,7 +339,8 @@ render();
 
 // outbound / intent clicks
 $$('a[href*="discord.gg"]').forEach(a => a.addEventListener('click', () => px('DiscordClick', {}, true)));
-$$('.store').forEach(a => a.addEventListener('click', () => px('StoreButtonClick', { store: $('.store-n', a).textContent }, true)));
+document.addEventListener('click', e => { const a = e.target.closest && e.target.closest('.store'); if (a) px('StoreButtonClick', { store: $('.store-n', a).textContent }, true); });
+const llc = $('#launchListCta'); if (llc) llc.addEventListener('click', () => px('LaunchListClick', {}, true));
 
 // sticky CTA — visible from the top, hidden only over the notify form & the draw game
 const sticky = $('#sticky'), notify = $('#notify'), draw = $('#draw');

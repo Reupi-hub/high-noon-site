@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#1a0f05">
-<title>Join the beta — High Noon</title>
-<meta name="description" content="High Noon is in beta on iOS and Android. The beta is currently full: join the free waitlist, or support the devs.">
+<title>High Noon beta — public launch December 6</title>
+<meta name="description" content="The High Noon beta on iOS and Android ends December 6, when the game opens to everyone. Join the launch list to get the telegram the minute it is out.">
 <link rel="icon" type="image/png" href="assets/favicon.png?v=20261031s">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="canonical" href="https://high-noon.co/beta.html">
@@ -15,16 +15,16 @@
 <link rel="alternate" hreflang="ar" href="https://high-noon.co/beta.html?lang=ar">
 <link rel="alternate" hreflang="x-default" href="https://high-noon.co/beta.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Join the High Noon beta">
-<meta property="og:description" content="The app is in beta on iOS and Android. Currently full — join the free waitlist, or support the devs.">
+<meta property="og:title" content="High Noon — public launch December 6">
+<meta property="og:description" content="The beta ends December 6, when High Noon opens to everyone on iOS and Android. Join the launch list.">
 <meta property="og:url" content="https://high-noon.co/beta.html">
 <meta property="og:image" content="https://high-noon.co/assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="assets/fonts/rye-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/special-elite-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<script src="assets/lang.js?v=20261101a" data-title-ar="انضم إلى البيتا — High Noon" data-desc-ar="High Noon في مرحلة البيتا على iOS و Android. المقاعد ممتلئة حالياً: انضم إلى قائمة الانتظار المجانية، أو ادعم المطوّرين."></script>
-<link rel="stylesheet" href="assets/landing.css?v=20261101a">
-<link rel="stylesheet" href="assets/beta.css?v=20261101a">
+<script src="assets/lang.js?v=20261127a" data-title-ar="بيتا High Noon — الإطلاق للجميع في 6 ديسمبر" data-desc-ar="بيتا High Noon على iOS و Android تنتهي في 6 ديسمبر، حين تُفتح اللعبة للجميع. انضم إلى قائمة الإطلاق لتصلك البرقية لحظة صدورها."></script>
+<link rel="stylesheet" href="assets/landing.css?v=20261127a">
+<link rel="stylesheet" href="assets/beta.css?v=20261127a">
 </head>
 <body class="beta-page">
 <div class="grain"></div>
@@ -34,18 +34,20 @@
 <button type="button" class="lang" id="lang" lang="ar" aria-label="العربية">عربي</button>
 </header>
 
+<a class="launch-bar" href="/#notify" id="launchBar"><b data-i18n="bar_k">Public launch · December 6</b><span data-i18n="bar_s">No waitlist anymore. Get the telegram →</span></a>
+
 <section class="sec beta-hero" id="top">
 <div class="wrap">
 <p class="kicker" data-i18n="hero_k">Beta program · iOS &amp; Android</p>
-<h1 class="h2 beta-title" data-i18n="hero_h">Join the beta.</h1>
-<p class="status" data-i18n="status">Beta in progress — currently full</p>
-<p class="lede" data-i18n="hero_p">The app version of High Noon is in the hands of its first testers on iPhone and Android since October 31, 2026.</p>
+<h1 class="h2 beta-title" id="betaH" data-i18n="hero_h">The beta ends December 6.</h1>
+<p class="status" id="betaStatus" data-i18n="status">Then everyone's in</p>
+<p class="lede" id="betaP" data-i18n="hero_p">The app version of High Noon has been in the hands of its first testers on iPhone and Android since October 31, 2026. On December 6, it opens to everyone.</p>
 <div class="stats">
 <div><b>7,000+</b><span data-i18n="st_players">players in the alpha</span></div>
 <div><b>200,000+</b><span data-i18n="st_duels">duels fought</span></div>
-<div><b lang="en">iOS · Android</b><span data-i18n="st_now">in beta now</span></div>
+<div><b data-i18n="st_date">Dec 6</b><span data-i18n="st_now">public launch</span></div>
 </div>
-<a class="btn btn-red" href="#options" data-i18n="hero_cta">How to get in</a>
+<a class="btn btn-red" id="betaCta" href="#options" data-i18n="hero_cta">Get the launch telegram</a>
 </div>
 </section>
 
@@ -55,7 +57,7 @@
 <span class="nail tl"></span><span class="nail tr"></span><span class="nail bl"></span><span class="nail br"></span>
 <p class="poster-k" data-i18n="th_k">★ Much obliged ★</p>
 <h2 class="poster-h th-h" data-i18n="th_h">Thank you, partner.</h2>
-<p class="poster-p" data-i18n="th_p">Your support just landed. It keeps the servers up and the coffee hot. It doesn't change your place in the beta line — but it means a lot to the team.</p>
+<p class="poster-p" data-i18n="th_p">Your support just landed. It keeps the servers up and the coffee hot. It doesn't buy anything in the game — but it means a lot to the team.</p>
 <a class="btn btn-wood th-btn" href="https://discord.gg/k8mKZS4XHM" target="_blank" rel="noopener noreferrer" data-i18n="th_discord">Ride with the posse on Discord</a>
 </div>
 </div>
@@ -63,9 +65,9 @@
 
 <section class="sec feats-sec" id="features">
 <div class="wrap">
-<p class="kicker reveal" data-i18n="feat_k">What you'll test</p>
+<p class="kicker reveal" data-i18n="feat_k">What you'll play</p>
 <h2 class="h2 reveal d1" data-i18n="feat_h">The whole game.</h2>
-<p class="lede reveal d15" data-i18n="feat_p">Not a slice of it. Everything that's live in the app, with new builds landing often.</p>
+<p class="lede reveal d15" data-i18n="feat_p">Not a slice of it. Everything the testers play today, out for everyone on December 6.</p>
 <ol class="feats">
 <li class="feat reveal"><span class="num">I</span><h3 data-i18n="f1_h">Real-time 1v1 duels</h3><p data-i18n="f1_p">Draw, aim with your phone, shoot, reload. Against players from everywhere — or a bot when the street is empty.</p></li>
 <li class="feat reveal d08"><span class="num">II</span><h3 data-i18n="f2_h">Three guns, three finishes</h3><p data-i18n="f2_p"><span lang="en">Schofield, Navy, Shotgun</span> — in Steel, Silver and Gold.</p></li>
@@ -86,7 +88,7 @@
 <ul class="steps">
 <li class="step reveal"><b>01</b><div><h3 data-i18n="s1_h">iPhone and Android</h3><p data-i18n="s1_p">Testers install the app through TestFlight on iPhone or Google Play on Android, and play the real game, with real players.</p></div></li>
 <li class="step reveal d1"><b>02</b><div><h3 data-i18n="s2_h">New builds, often</h3><p data-i18n="s2_p">Fixes and features ship as they're ready. Testers report in <span lang="en">#beta-feedbacks</span> on Discord — every report counts.</p></div></li>
-<li class="step reveal d2"><b>03</b><div><h3 data-i18n="s3_h">Invitations by email</h3><p data-i18n="s3_p">When seats open, you get an email with your link. One waitlist for both platforms. Nothing to pay.</p></div></li>
+<li class="step reveal d2"><b>03</b><div><h3 data-i18n="s3_h">Public launch, December 6</h3><p data-i18n="s3_p">On December 6, High Noon opens to everyone on the App Store and Google Play. No invitation needed. Free to download.</p></div></li>
 </ul>
 </div>
 </section>
@@ -94,21 +96,20 @@
 <section class="sec options" id="options">
 <div class="wrap">
 <p class="kicker reveal" data-i18n="opt_k">Right now</p>
-<h2 class="h2 reveal d1" data-i18n="opt_h">The beta is full.<br>Here's what you can do.</h2>
-<p class="lede reveal d15" data-i18n="opt_p">Every seat is taken. We open new ones in small batches as the servers and the team can take more.</p>
+<h2 class="h2 reveal d1" id="optH" data-i18n="opt_h">No more waiting line.<br>December 6, it's open.</h2>
+<p class="lede reveal d15" id="optP" data-i18n="opt_p">The beta is full and closes on December 6, when the game opens to everyone. Here's what you can do until then.</p>
 <div class="opts">
-<article class="opt reveal d2">
+<article class="opt reveal d2" id="optLaunch">
 <span class="opt-tag free" data-i18n="o1_tag">Free</span>
-<h3 data-i18n="o1_h">Join the waitlist</h3>
-<p data-i18n="o1_p">Fill in the form. When seats open, invitations go out by email, in small batches, in order. No date promised — but every name on the list gets its turn.</p>
-<p class="opt-tip" data-i18n="o1_tip">Followers of our TikTok, Instagram and Facebook go first — the form will ask.</p>
-<a class="btn btn-red" id="waitlist" href="https://forms.gle/vDP7T2i5dxeoX7eZA" target="_blank" rel="noopener noreferrer" data-i18n="o1_cta">Join the waitlist →</a>
-<p class="fine opt-fine" data-i18n="o1_fine">Google Form · iOS &amp; Android</p>
+<h3 data-i18n="o1_h">Join the launch list</h3>
+<p data-i18n="o1_p">Leave your email and get one telegram the minute High Noon is out on the App Store and Google Play. No spam.</p>
+<a class="btn btn-red" id="launchList" href="/#notify" data-i18n="o1_cta">Join the launch list →</a>
+<p class="fine opt-fine" data-i18n="o1_fine">One email at launch · iOS &amp; Android</p>
 </article>
 <article class="opt support reveal d3">
 <span class="opt-tag" data-i18n="o2_tag">Optional</span>
 <h3 data-i18n="o2_h">Support the devs</h3>
-<p data-i18n="o2_p">Like what we're building? Chip in <span dir="ltr">$4.99</span>, or whatever you like, one time. <b>This doesn't buy beta access. It buys us coffee and keeps the servers up.</b> No priority, no in-game items — just our thanks, and your name on the supporters wall when it goes up.</p>
+<p data-i18n="o2_p">Like what we're building? Chip in <span dir="ltr">$4.99</span>, or whatever you like, one time. <b>This doesn't buy anything in the game. It buys us coffee and keeps the servers up.</b> No priority, no in-game items — just our thanks, and your name on the supporters wall when it goes up.</p>
 <a class="btn btn-wood" id="support" href="https://buy.stripe.com/9B6fZheBX7pM7iv2MvfnO00" target="_blank" rel="noopener noreferrer" data-i18n="o2_cta">Support High Noon</a>
 <p class="fine opt-fine" data-i18n="o2_fine">One-time · You pick the amount · Secure checkout by Stripe · No access included</p>
 </article>
@@ -122,8 +123,8 @@
 <dl class="faq reveal d1">
 <dt data-i18n="q1">Already a tester?</dt><dd data-i18n="a1">Post what you find in <span lang="en">#beta-feedbacks</span> on Discord. Bugs, ideas, everything.</dd>
 <dt data-i18n="q2">Bought skins in the alpha?</dt><dd data-i18n="a2">They're waiting for you in the app, on the same account. Those purchases paid for the app — thank you.</dd>
-<dt data-i18n="q3">On Android?</dt><dd data-i18n="a3">Same beta, same waitlist. Android testers get their Google Play link by email.</dd>
-<dt data-i18n="q4">Not in the beta yet?</dt><dd data-i18n="a4">Get the launch telegram on the <a href="/#notify" data-i18n="a4_link">home page</a>, and ride with the posse on <a href="https://discord.gg/k8mKZS4XHM" target="_blank" rel="noopener noreferrer">Discord</a>.</dd>
+<dt data-i18n="q3">On Android?</dt><dd data-i18n="a3">Same launch, same day: December 6, on Google Play.</dd>
+<dt data-i18n="q4">Not in the beta?</dt><dd id="faqA4" data-i18n="a4">No need anymore: the game opens to everyone on December 6. Get the launch telegram on the <a href="/#notify">home page</a>, and ride with the posse on <a href="https://discord.gg/k8mKZS4XHM" target="_blank" rel="noopener noreferrer">Discord</a>.</dd>
 </dl>
 </div>
 </section>
@@ -132,14 +133,14 @@
 <div class="wrap">
 <div class="foot-mark" lang="en">★ High Noon Reborn ★</div>
 <nav class="foot-links"><a href="/" data-i18n="home">Home</a><a href="https://discord.gg/k8mKZS4XHM" target="_blank" rel="noopener noreferrer">Discord</a></nav>
-<nav class="foot-legal"><a href="/privacy/" data-i18n="privacy">Privacy policy</a><a href="mailto:contact@high-noon.co">contact@high-noon.co</a><a href="#" data-consent-open hidden data-i18n="cookies">Cookie settings</a></nav>
-<p class="copy" data-i18n="copy">© 2026 High Noon Reborn. App Store and Google Play are trademarks of their respective owners.</p>
+<nav class="foot-legal"><a href="/privacy/" data-i18n="privacy">Privacy policy</a><a href="/terms/#legal-notice" data-i18n="legal">Legal notice</a><a href="mailto:contact@high-noon.co">contact@high-noon.co</a><a href="#" data-consent-open hidden data-i18n="cookies">Cookie settings</a></nav>
+<p class="copy" data-i18n="copy">© 2026 LEMON TREE. App Store and Google Play are trademarks of their respective owners.</p>
 </div>
 </footer>
 
-<div class="sticky" id="sticky"><div class="sticky-in"><span><span data-i18n="sticky_k">Currently full</span><small data-i18n="sticky_s">Beta · Free waitlist</small></span><a class="btn btn-red" href="https://forms.gle/vDP7T2i5dxeoX7eZA" target="_blank" rel="noopener noreferrer" data-i18n="sticky_cta">Waitlist</a></div></div>
+<div class="sticky" id="sticky"><div class="sticky-in"><span><span id="stickyK" data-i18n="sticky_k">Out Dec 6</span><small data-i18n="sticky_s">iOS · Android</small></span><a class="btn btn-red" id="stickyBtn" href="/#notify" data-i18n="sticky_cta">Launch list</a></div></div>
 
 <script src="assets/consent.js?v=20261126a" data-pixel="1439385060968025"></script>
-<script src="assets/beta.js?v=20261101c"></script>
+<script src="assets/beta.js?v=20261127a"></script>
 </body>
 </html>

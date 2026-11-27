@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#1a0f05">
-<title>High Noon — Coming soon on App Store &amp; Google Play</title>
-<meta name="description" content="High Noon — 1v1 western duels. Draw fast, live long. Coming soon on iOS and Android.">
+<title>High Noon — Out December 6 on App Store &amp; Google Play</title>
+<meta name="description" content="High Noon — 1v1 western duels. Draw fast, live long. Out December 6, 2026 on iOS and Android.">
 <link rel="icon" type="image/png" href="assets/favicon.png?v=20261031s">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="canonical" href="https://high-noon.co/">
@@ -15,15 +15,15 @@
 <link rel="alternate" hreflang="ar" href="https://high-noon.co/?lang=ar">
 <link rel="alternate" hreflang="x-default" href="https://high-noon.co/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="High Noon — Coming soon on App Store &amp; Google Play">
-<meta property="og:description" content="1v1 western duels. Draw fast, live long. Coming soon on iOS and Android.">
+<meta property="og:title" content="High Noon — Out December 6 on App Store &amp; Google Play">
+<meta property="og:description" content="1v1 western duels. Draw fast, live long. Out December 6, 2026 on iOS and Android.">
 <meta property="og:url" content="https://high-noon.co/">
 <meta property="og:image" content="https://high-noon.co/assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="assets/fonts/rye-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/special-elite-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<script src="assets/lang.js?v=20261101a"></script>
-<link rel="stylesheet" href="assets/landing.css?v=20261101b">
+<script src="assets/lang.js?v=20261127a"></script>
+<link rel="stylesheet" href="assets/landing.css?v=20261127a">
 </head>
 <body>
 <div class="grain"></div>
@@ -33,7 +33,7 @@
 <button type="button" class="lang" id="lang" lang="ar" aria-label="العربية">عربي</button>
 <div class="hero-top">
 <span class="wordmark" lang="en">★ High Noon Reborn ★</span>
-<span class="ribbon" data-i18n="ribbon">Coming soon</span>
+<span class="ribbon" id="ribbon" data-i18n="ribbon">December 6</span>
 </div>
 <h1 class="hero-title"><span class="w w1" lang="en">HIGH</span><span class="w w2" lang="en">NOON</span><span class="hero-tag" data-i18n="hero_tag">★ Draw fast · Live long ★</span></h1>
 <div class="posse">
@@ -116,11 +116,15 @@
 <div class="tumble" aria-hidden="true"><svg viewBox="-16 -16 32 32"><g stroke="#6B3A12" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.95"><circle cx="0" cy="0" r="13"></circle><ellipse cx="0" cy="0" rx="13" ry="9" transform="rotate(25)"></ellipse><ellipse cx="0" cy="0" rx="13" ry="9" transform="rotate(70)"></ellipse><ellipse cx="0" cy="0" rx="12" ry="7" transform="rotate(110)"></ellipse><ellipse cx="0" cy="0" rx="13" ry="5" transform="rotate(150)"></ellipse></g><g stroke="#C8894A" stroke-width="0.9" fill="none" stroke-linecap="round" opacity="0.85"><ellipse cx="0" cy="0" rx="10" ry="6" transform="rotate(15)"></ellipse><ellipse cx="0" cy="0" rx="9" ry="5" transform="rotate(60)"></ellipse><ellipse cx="0" cy="0" rx="10" ry="3" transform="rotate(95)"></ellipse><ellipse cx="0" cy="0" rx="8" ry="6" transform="rotate(135)"></ellipse></g></svg></div>
 </div>
 <div class="hero-cta">
-<div class="stores">
-<a class="store" href="#notify"><span class="store-k" data-i18n="soon_on">Soon on</span><span class="store-n" lang="en">App Store</span></a>
-<a class="store" href="#notify"><span class="store-k" data-i18n="soon_on">Soon on</span><span class="store-n" lang="en">Google Play</span></a>
+<div class="countdown" id="countdown" role="timer" aria-labelledby="cd-label">
+<span class="sr-only" id="cd-label" data-i18n="cd_label">Launch: December 6, 2026, at noon Paris time</span>
+<div class="cd" aria-hidden="true"><span class="cd-u"><b data-u="d">--</b><small data-i18n="cd_d">Days</small></span><i>:</i><span class="cd-u"><b data-u="h">--</b><small data-i18n="cd_h">Hrs</small></span><i>:</i><span class="cd-u"><b data-u="m">--</b><small data-i18n="cd_m">Min</small></span><i>:</i><span class="cd-u"><b data-u="s">--</b><small data-i18n="cd_s">Sec</small></span></div>
 </div>
-<p class="hero-note" data-i18n="hero_note">Not live yet. Get the telegram when it is.<b>↓</b></p>
+<div class="stores">
+<a class="store" href="#notify" data-store="ios"><span class="store-k" data-i18n="soon_on">Out Dec 6 on</span><span class="store-n" lang="en">App Store</span></a>
+<a class="store" href="#notify" data-store="android"><span class="store-k" data-i18n="soon_on">Out Dec 6 on</span><span class="store-n" lang="en">Google Play</span></a>
+</div>
+<p class="hero-note" id="heroNote" data-i18n="hero_note">Get the telegram at high noon.<b>↓</b></p>
 </div>
 </div>
 </header></div>
@@ -129,15 +133,15 @@
 <div class="wrap">
 <div class="call reveal">
 <span class="call-tag" data-i18n="beta_tag">Beta</span>
-<p class="kicker" data-i18n="beta_k">In beta · iOS &amp; Android</p>
-<h2 class="h2" data-i18n="beta_h">Join the beta.</h2>
-<p class="status" data-i18n="beta_status">Beta in progress — currently full</p>
-<p class="lede" data-i18n="beta_p">The app is in the hands of its first testers on iPhone and Android since October 31. Seats open in small batches — get in line, it's free.</p>
+<p class="kicker" data-i18n="beta_k">Last days of the beta</p>
+<h2 class="h2" data-i18n="beta_h">The beta ends December 6.</h2>
+<p class="status" data-i18n="beta_status">Then everyone's in</p>
+<p class="lede" data-i18n="beta_p">The first testers have been dueling since October 31. On December 6, High Noon opens to everyone on iPhone and Android, free.</p>
 <div class="call-btns">
-<a class="btn btn-wood" href="beta.html" data-i18n="beta_cta">How to get in →</a>
+<a class="btn btn-wood" href="#notify" id="launchListCta" data-i18n="beta_cta">Join the launch list →</a>
 <a class="btn btn-red" href="https://discord.gg/k8mKZS4XHM" target="_blank" rel="noopener noreferrer" data-i18n="beta_discord">Join the community</a>
 </div>
-<p class="call-note" data-i18n="beta_note">iOS &amp; Android · Free waitlist · Discord</p>
+<p class="call-note" data-i18n="beta_note">Free on iOS &amp; Android · <a href="beta.html">About the beta</a></p>
 </div>
 </div>
 </section>
@@ -203,13 +207,13 @@
 <span class="nail tl"></span><span class="nail tr"></span><span class="nail bl"></span><span class="nail br"></span>
 <p class="poster-k" data-i18n="wanted">★ Wanted ★</p>
 <h2 class="poster-h" data-i18n="you_h">You.</h2>
-<p class="poster-p" data-i18n="poster_p">Be in the street the second we go live. One telegram. No spam.</p>
+<p class="poster-p" id="posterP" data-i18n="poster_p">December 6, high noon. Be in the street. One telegram. No spam.</p>
 <form class="form" novalidate data-endpoint="https://app.us7.list-manage.com/subscribe/post-json?u=4ce3532625e42c3aa5599476f&amp;id=47361efd00&amp;f_id=00c409e0f0">
 <div class="hp" aria-hidden="true"><input type="text" name="b_4ce3532625e42c3aa5599476f_47361efd00" tabindex="-1" autocomplete="off" value=""></div>
 <input type="email" name="EMAIL" placeholder="your@email.com" autocomplete="email" inputmode="email" required aria-label="Email address" data-i18n-aria="email_aria" dir="ltr">
 <button type="submit" class="btn btn-red" data-i18n="notify_me">Notify me</button>
 </form>
-<p class="fine" data-i18n="fine">Soon on App Store &amp; Google Play</p>
+<p class="fine" data-i18n="fine">December 6 · App Store &amp; Google Play</p>
 <p class="done" hidden data-i18n="done">Telegram received.<br>See you at noon.</p>
 </div>
 <a class="discord" href="https://discord.gg/k8mKZS4XHM" target="_blank" rel="noopener noreferrer" data-i18n="discord">Or ride with the posse on Discord →</a>
@@ -242,14 +246,14 @@
 <div class="wrap">
 <div class="foot-mark" lang="en">★ High Noon Reborn ★</div>
 <nav class="foot-links"><a href="https://discord.gg/k8mKZS4XHM" target="_blank" rel="noopener noreferrer">Discord</a><a href="/support/" lang="en">Support</a></nav>
-<nav class="foot-legal"><a href="/privacy/" data-i18n="privacy">Privacy policy</a><a href="/terms/" lang="en">Terms of use</a><a href="/delete-account/" lang="en">Delete account</a><a href="mailto:contact@high-noon.co">contact@high-noon.co</a><a href="#" data-consent-open hidden data-i18n="cookies">Cookie settings</a></nav>
-<p class="copy" data-i18n="copy">© 2026 High Noon Reborn. App Store and Google Play are trademarks of their respective owners.</p>
+<nav class="foot-legal"><a href="/privacy/" data-i18n="privacy">Privacy policy</a><a href="/terms/" lang="en">Terms of use</a><a href="/delete-account/" lang="en">Delete account</a><a href="/terms/#legal-notice" data-i18n="legal">Legal notice</a><a href="mailto:contact@high-noon.co">contact@high-noon.co</a><a href="#" data-consent-open hidden data-i18n="cookies">Cookie settings</a></nav>
+<p class="copy" data-i18n="copy">© 2026 LEMON TREE. App Store and Google Play are trademarks of their respective owners.</p>
 </div>
 </footer>
 
-<div class="sticky" id="sticky"><div class="sticky-in"><span><span data-i18n="launching">Launching soon</span><small lang="en">App Store · Google Play</small></span><a class="btn btn-red" href="#notify" data-i18n="notify_me">Notify me</a></div></div>
+<div class="sticky" id="sticky"><div class="sticky-in"><span><span id="stickyK" data-i18n="launching">Out Dec 6</span><small id="stickyS" lang="en">App Store · Google Play</small></span><a class="btn btn-red" id="stickyBtn" href="#notify" data-i18n="notify_me">Notify me</a></div></div>
 
 <script src="assets/consent.js?v=20261126a" data-pixel="1439385060968025"></script>
-<script src="assets/landing.js?v=20261101c"></script>
+<script src="assets/landing.js?v=20261127a"></script>
 </body>
 </html>
